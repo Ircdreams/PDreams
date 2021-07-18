@@ -1,0 +1,123 @@
+			-- [ -> PDREAMS 1.3 RELEASED<- ] --
+
+		--< INSTALL >--
+
+Bienvenue dans le fichier d'aide à l'installation de PDreams.
+
+Sommaire :
+1) téléchargement
+2) make config
+3) make
+4) pdreams.conf
+5) link
+6) lancement
+
+1) téléchargement
+=================
+Tapez ça dans votre shell :
+$ cvs -d:pserver:anonymous@ircdreams.org:/cvsroot co PDreams
+Vous pouvez maintenant vous déplacer dans le dossier PDreams avec :
+$ cd PDreams/
+
+2) make config
+==============
+Ce script permet d'effectuer quelques configurations plus approfondies (nom de fichiers,
+modules, paramètres constants) que le fichier pdreams.conf, qui lui contient les options plus
+dynamiques (serveur hote, infos robots, paramètres, etc).
+Pour l'utiliser, tapez :
+$ make config
+Vous pouvez maintenant répondre aux questions posées. Pour sauter une question et laisser
+sa valeur par défaut (pour les chaines de textes, entre [], et pour les "boolean" (réponse
+OUI ou NON), c'est la lettre en majuscule (ex [Y/n])).
+Répondez bien aux questions car c'est assez important, en particulier les premières questions.
+N'oubliez pas que PDreams a été prévu uniquement pour être compatible avec IrcDreams.
+Nous ne somme pas responsable du non fonctionnement de PDreams sur d'autres daemon irc, tels que
+ircu, bahamut ou hybrid.
+
+3) make
+=======
+Une fois la configuration du script effectuée, vous devez compiler PDreams. Pour se faire, tapez:
+$ make
+En cas d'erreurs de compilation, veuillez vérifier que vous avez un systeme compatible avec PDreams,
+que vous avez pris une version STABLE de PDreams (voir "1. téléchargement") et que possédez bien
+les programmes requis (gcc, les libs, etc). Si tout ceci est bon, vous pouvez nous contacter pour
+signaler la présence d'erreurs de compilation. Nous serons ravi de passer toute notre nuit pour
+vous satisfaire.
+
+4) pdreams.conf
+===============
+La compilation terminée, vous devez paramétrer le fichier de configuration, nommé par défaut pdreams.conf.
+En effet, dans le make config, vous avez pu le nommer autrement.
+Comme vous l'aurez constaté, il n'existe pas encore, mais un fichier exemple.conf, lui, est présent. Veuillez
+le renommer en le nom que vous avez paramétré dans make config (par défaut pdreams.conf) avec:
+$ cp exemple.conf <conf>
+par exemple, par default :
+$ cp exemple.conf pdreams.conf
+
+Maintenant vous pouvez le configurer. Si vous avez besoin d'aide, n'hésitez pas à nous contacter.
+
+6) link
+=======
+Vous devez configurer sur votre/vos serveur(s) l'acceptation de la connexion de pdreams. Pour se faire, il faut
+utiliser les paramètres que vous avez mis dans pdreams.conf. Prenons par exemple que vous avez mis
+ceci :
+uplink {
+	ip = 127.0.0.1
+	port = 4400
+	pass = prout
+}
+myserver {
+	server = proxy.ircdreams.org
+	..
+}
+
+Vous devez mettre dans l'ircd.conf du serveur qui recevra la connexion, c'est à dire le hub de pdreams :
+C:<ip sur laquelle se trouve pdreams par rapport au serveur>:prout:proxy.ircdreams.org::50
+U:proxy.ircdreams.org::*
+
+ATTENTION ! Si les mots de pass sont paramétrés comme cryptés dans l'ircd.conf, vous devez utiliser l'outil
+mkpasswd pour crypter les pass. Vous devrez mettre le pass crypté dans l'ircd.conf, et si c'est IrcDreams
+uniquement, vous devrez aussi mettre le pass crypté dans pdreams.conf.
+
+Par exemple:
+$ mkpasswd
+Password: prout
+7yX/8r1if.PzI
+
+En outre, <ip sur laquelle se trouve pdreams par rapport au serveur> doit bien entendu être remplacé par
+l'ip sur laquelle se trouve pdreams par rapport au serveur.
+
+Maintenant, sur TOUS les autres serveurs du réseau auquel fait partit le hub sur lequel vous allez connecté
+pdreams, vous devez mettre cette ligne:
+U:proxy.ircdreams.org::*
+
+Pour finir, vérifier que le nombre que vous avez donné au paramètre NUMERIC n'est utilisé dans AUCUNE
+des M:Lines de tous les serveurs du réseau.
+Tapez /rehash sur tous les serveurs du réseau.
+
+7) lancement
+============
+Theoriquement, maintenant c'est bon, vous allez enfin pouvoir lancer votre service.
+Pour ce faire, tapez:
+$ ./PDreams
+
+Sur votre réseau, tapez :
+/<robot> register <login de SDreams>
+Par exemple:
+/P register BuGs
+
+Vous vous retrouvez administrateur du service niveau 5.
+Vous pourrez enregistrer, nommer des utilisateurs Admin avec la commande USER
+
+Pour Ajouter un accès:
+Syntaxe: USER ADD <username SDREAMS> <niveau>
+Pour supprimer un accès:
+Syntaxe: USER DEL <username>
+Pour lister les accès:
+Syntaxe USER LIST
+Pour modifier un accès:
+Syntaxe: USER LEVEL <username> <nouveau level>
+        
+Les programmeurs de PDreams vous souhaitent une bonne utilisation de leur programme.
+
+BuGs

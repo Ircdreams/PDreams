@@ -1,0 +1,58 @@
+#IPCHECK
+!%s <ip>
+Action: Verifie si l'ip n'est pas listé comme proxy sur opm.blitzed.org.
+#ADMIN
+Action: Montre les pseudos des Administrateurs des Services
+#AIDE
+Action: Permet d'avoir de l'aide à propos d'une commande.
+#CHCOMNAME
+!%s <commande> <nouveau nom>
+Action: Change le nom d'une commande
+#CHLEVEL
+!%s <commande> <niveau>
+Action: Change le niveau nécessaire pour executer une commande.
+(Si l'argument -admin est precise, la commande passe admin (toggle))
+#DIE
+Action: Clos les Services PDreams
+#DISABLE
+!%s [option] <commande> <ON/OFF>
+Action: Si ON, la commande est desactivée
+        Si OFF, la commande est activée
+|-LIST : Permet de lister les commandes désactivées.
+#INVITEME
+Action: Invite un CSAdministrateur sur le salon d'informations.
+#LOGIN
+!%s <username> <pass>
+Action: Permet de s'identifier sur son username.
+        Vous serez identifié sur tous les salons où vous avez accès,
+        et vous aurrez la possibilité d'envoyer et de lire vos memos.
+        Vous pourrez aussi enregistrer un salon.
+#REHASH
+Action: Actualise la configuration
+#RESTART
+!%s [raison]
+Action: Effectue un redemarrage du programme des services, ce qui permet d'effectuer une mise à Jour.
+#SHOWCONFIG
+Action: Permet de voir l'état des variables de configuration
+#TRUST
+!%s <option> <ip>
+Action : Ajoute/supprime une adresse ip a la liste de confiance
+|ADD <host>                   Ajoute une ip
+|DEL <host>                   supprime une ip
+|LIST                         Affiche la liste de confiance
+|RAZ                          Efface cette base de données
+#UPTIME
+Action: Voir depuis combien de temps les services
+        sont lancés.
+#USER
+!%s <option> <Username> <level>
+Action: Modifie / liste les accès à un user ENREGISTRÉ sur SDreams.
+        Le niveau va de 1 à 10.
+|ADD <username> <level>      Ajoute un accès
+|DEL <username>              Supprime un accès
+|LIST                        Liste les accès
+|LEVEL <username> <level>    Modifie un accès
+#VERSION
+Action: Permet d'afficher la version courante de PDreams.
+#WRITE
+Action: Permet d'écrire toutes les données.
