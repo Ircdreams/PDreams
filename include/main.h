@@ -44,7 +44,7 @@
 #define SPVERSION SD_VERSION
 */
 
-#define SPVERSION "1.4.RELEASED"
+#define SPVERSION "2.0.DEV"
 
 /* Variables */
 

@@ -62,12 +62,12 @@ int dnscheck(aNick *nick, aChan *chaninfo, int parc, char **parv)
         ip = c2 + 1;
         d = atoi(ip);
 
-	snprintf(iptest, 500, "host %d.%d.%d.%d.opm.blitzed.org", d, c, b, a);
+	snprintf(iptest, 500, "host %d.%d.%d.%d.dnsbl.dronebl.org", d, c, b, a);
         flux = popen(iptest, "r");
         fgets(buff, 500, flux);
         pclose(flux);
-        if (!match("*127.1.0.*", buff)) {
-		strcpy(enculeraison, "Proxy Anonyme Interdit. Pour plus d'information, visitez http://opm.blitzed.org/");
+        if (!match("*127.0.0.*", buff)) {
+		strcpy(enculeraison, "You have a host listed in the DroneBL. For more information, visit http://dronebl.org/lookup?ip=");
 		strcat(enculeraison, parv[1]);
 		putserv("%s " TOKEN_PRIVMSG " %s :[%02d:%02d:%02d] < \2\0036PROXY GLINE\2\3 *!*@%s",
                         os.num, bot.pchan, ntime->tm_hour, ntime->tm_min, ntime->tm_sec, parv[1]);
@@ -108,12 +108,12 @@ int testdns(const char *parv)
         ip = c2 + 1;
         d = atoi(ip);
 
-        snprintf(iptest, 500, "host %d.%d.%d.%d.opm.blitzed.org", d, c, b, a);
+        snprintf(iptest, 500, "host %d.%d.%d.%d.dnsbl.dronebl.org", d, c, b, a);
         flux = popen(iptest, "r");
         fgets(buff, 500, flux);
         pclose(flux);
-        if (!match("*127.1.0.*", buff)) {
-		strcpy(enculeraison, "Proxy Anonyme Interdit. Pour plus d'information, visitez http://opm.blitzed.org/");
+        if (!match("*127.0.0.*", buff)) {
+		strcpy(enculeraison, "You have a host listed in the DroneBL. For more information, visit http://dronebl.org/lookup?ip=");
                 strcat(enculeraison, parv);
                 putserv("%s " TOKEN_PRIVMSG " %s :[%02d:%02d:%02d] < \2\0036PROXY GLINE\2\3 *!*@%s",
                         os.num, bot.pchan, ntime->tm_hour, ntime->tm_min, ntime->tm_sec, parv);
