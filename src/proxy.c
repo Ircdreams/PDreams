@@ -71,7 +71,7 @@ int dnscheck(aNick *nick, aChan *chaninfo, int parc, char **parv)
 		strcat(enculeraison, parv[1]);
 		putserv("%s " TOKEN_PRIVMSG " %s :[%02d:%02d:%02d] < \2\0036PROXY GLINE\2\3 *!*@%s",
                         os.num, bot.pchan, ntime->tm_hour, ntime->tm_min, ntime->tm_sec, parv[1]);
-                putserv("%s GL * +*@%s 3600 :%s [Expire %s]", bot.servnum, parv[1], enculeraison,
+                putserv("%s GL * +*@%s 3600 %d %d :%s [Expire %s]", bot.servnum, parv[1], tmt, end, enculeraison,
                         get_time(NULL,end));
 
                 strcpy(params, "*@");
@@ -117,7 +117,7 @@ int testdns(const char *parv)
                 strcat(enculeraison, parv);
                 putserv("%s " TOKEN_PRIVMSG " %s :[%02d:%02d:%02d] < \2\0036PROXY GLINE\2\3 *!*@%s",
                         os.num, bot.pchan, ntime->tm_hour, ntime->tm_min, ntime->tm_sec, parv);
-                putserv("%s GL * +*@%s 3600 :%s [Expire %s]", bot.servnum, parv, enculeraison,
+                putserv("%s GL * +*@%s 3600 %d %d :%s [Expire %s]", bot.servnum, parv, tmt, end, enculeraison,
                         get_time(NULL,end));
 
                 strcpy(params, "*@");
