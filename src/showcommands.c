@@ -1,10 +1,10 @@
 /* src/showcommands.c - Liste les commandes
- * Copyright (C) 2004 ircdreams.org
+ * Copyright (C) 2021 ircdreams.org - bugsounet.fr
  *
- * contact: bugs@ircdreams.org
- * site web: http://ircdreams.org
+ * contact: bugsounet@bugsounet.fr
+ * site web: http://www.bugsounet.fr
  *
- * Services pour serveur IRC. Supporté sur IrcDreams V.2
+ * Services pour serveur IRC. Supporté sur IrcDreams V3
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * $Id: showcommands.c,v 1.3 2005/06/19 11:24:05 bugs Exp $
  */
 
 #include "main.h"
@@ -64,7 +63,7 @@ int BuildCommandsTable(int rebuild)
 		{/* preparons les buffers */
 			tmp->nb = 1;
 			tmp->buf = malloc(sizeof *tmp->buf);
-			tmp->level = sprintf(*tmp->buf, "\2\0033Niveau %3d:\2\3", level);
+			tmp->level = sprintf(*tmp->buf, "\2\0033LEVEL %3d:\2\3", level);
 		}
 		else if(tmp->level > 85)/* ligne pleine, ajoutons une nouvelle */
 		{
@@ -83,15 +82,14 @@ int showcommands(aNick *nick, aChan *chaninfo, int parc, char **parv)
 {
 	int i, j;
 
-	osntc(nick, "Commandes \2User\2");
+	osntc(nick, "\2User\2 Commands");
 	for(i = 0;i <= (nick->user ? nick->user->level : 0);++i)
 	{
-		if(i == ADMINLEVEL) osntc(nick, "Commandes \2Administrateur\2");
+		if(i == ADMINLEVEL) osntc(nick, "\2Administrator\2 Commands");
 		for(j = 0; j < scmd_user[i].nb;++j)
     		osntc(nick, "%s", scmd_user[i].buf[j]);
-
 	}
 
-	osntc(nick, "Pour de l'aide sur une commande tapez \2/%s %s <commande>\2", os.nick, RealCmd("aide"));
+	osntc(nick, "Type \2/%s %s <command>\2 to get more help about a command.", os.nick, RealCmd("aide"));
 	return 1;
 }
