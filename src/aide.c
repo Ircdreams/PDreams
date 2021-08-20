@@ -32,11 +32,11 @@ int syntax_cmd(aNick *nick, aHashCmd *cmd)
 {
 	static char helpcmd[CMDLEN + 1] = {0};
 
-	if(!*cmd->syntax) return osntc(nick, "\2Erreur de syntaxe !");
+	if(!*cmd->syntax) return osntc(nick, "\2Syntax error!");
 	if(helpcmd[0] == 0) strcpy(helpcmd, RealCmd("aide"));
 
 	osntc(nick, cmd->syntax, cmd->name);
-	osntc(nick, "Tapez \2/%s %s %s\2 pour plus d'informations.", os.nick, helpcmd, cmd->name);
+	osntc(nick, "Type \2/%s %s %s\2 for further help..", os.nick, helpcmd, cmd->name);
 	return 1;
 }
 
@@ -49,19 +49,19 @@ int aide(aNick *nick, aChan *chaninfo, int parc, char **parv)
 
 	if(!parc) return showcommands(nick, chaninfo, parc, parv);
 
-	if(!(cmdp = FindCommand(parv[1]))) return osntc(nick, "La commande \2%s\2 n'existe pas.", parv[1]);
+	if(!(cmdp = FindCommand(parv[1]))) return osntc(nick, "\2%s\2 is not a valid command.", parv[1]);
 
 	help = cmdp->help[1];
-	if(!help) return osntc(nick, "\2Aide non trouvée, consultez un Administrateur");
+	if(!help) return osntc(nick, "\2Help not found, contact an Administrator");
 
 	if(parc > 1) {
 		Strncpy(more, parv[2], sizeof more - 1);
 		morelen = strlen(more);
-		osntc(nick, "\2Aide\2 sur la commande \2%s\2 >> \2%s\2 (\2\003%s\2\3 Niveau %d)", parv[1], more,
+		osntc(nick, "\2HELP\2 about command \2%s\2 >> \2%s\2 (\2\003%s\2\3 LEVEL %d)", parv[1], more,
 			AdmCmd(cmdp) ? "4ADMIN" : ChanCmd(cmdp) ? "12CHAN" : HelpCmd(cmdp) ? "7HELPER" : "3USER", cmdp->level);
 	}
 	else {
-		osntc(nick, "\2Aide\2 sur la commande \2%s\2 (\2\003%s\2\3 Niveau %d)", parv[1],
+		osntc(nick, "\2HELP\2 about command \2%s\2 (\2\003%s\2\3 Level %d)", parv[1],
 			AdmCmd(cmdp) ? "4ADMIN" : ChanCmd(cmdp) ? "12CHAN" : HelpCmd(cmdp) ? "7HELPER" : "3USER", cmdp->level);
 		if(*cmdp->syntax) osntc(nick, cmdp->syntax, cmdp->name);
 	}
@@ -86,11 +86,11 @@ int aide(aNick *nick, aChan *chaninfo, int parc, char **parv)
 	}
 
 	/* looking for option, but not found! */
-	if(morelen && !cur)	osntc(nick, "Aucune aide sur \2%s\2 pour la commande %s", more, parv[1]);
+	if(morelen && !cur)	osntc(nick, "No help on \2%s\2 for %s command", more, parv[1]);
 	/* there are options but none found/searched */
 	if(*list == '|' && !cur) osntc(nick, "Options: %s", list + 1);
 	/* option found or none looked for (search success!) */
-	if(cmdp->flag & CMD_DISABLE) osntc(nick, "\2\0034Note:\2\3 Commande désactivée.");
+	if(cmdp->flag & CMD_DISABLE) osntc(nick, "\2\0034Note:\2\3 Command disabled.");
 
 	return 1;
 }
