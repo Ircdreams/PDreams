@@ -58,7 +58,7 @@ int show_admins(aNick *nick, aChan *chaninfo, int parc, char **parv)
 	anUser *u;
 	osntc(nick, "\2Here  Level  Username       Nickname\2");
 	for(;i < USERHASHSIZE;++i) for(u = user_tab[i];u;u = u->next)
-		if(IsAdmin(u)) osntc(nick, "\2\003%s\2\3 %d     %-13s    \0032%s\3",
+		if(IsAdmin(u)) osntc(nick, "\2\003%s\2\3   %d     %-13s    \0032%s\3",
 				u->n ? "3YES" : "4NO", u->level, u->nick, u->n ? u->n->nick : "");
 	return 1;
 }

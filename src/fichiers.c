@@ -1,10 +1,10 @@
 /* fichiers.c - Lecture/Écriture des données
- * Copyright (C) 2004 ircdreams.org
+ * Copyright (C) 2021 ircdreams.org - bugsounet.fr
  *
- * contact: bugs@ircdreams.org
- * site web: http://ircdreams.org
+ * contact: bugsounet@bugsounet.fr
+ * site web: http://www.bugsounet.fr
  *
- * Services pour serveur IRC. Supporté sur IrcDreams V.2
+ * Services pour serveur IRC. Supporté sur IrcDreams V3
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -190,8 +190,8 @@ int write_files(aNick *nick, aChan *chan, int parc, char **parv)
 
 	db_write_users();
 	write_cmds();
-        write_trusted();
-        osntc(nick, "Les fichiers ont bien été écrits.");
+    write_trusted();
+    osntc(nick, "DB Files writed successfully.");
         return 1;
 }
 

@@ -1,10 +1,10 @@
 /* src/hash_nick.c - gestion des hash nick
- * Copyright (C) 2004-2005 ircdreams.org
+ * Copyright (C) 2021 ircdreams.org - bugsounet.fr
  *
- * contact: bugs@ircdreams.org
- * site web: http://ircdreams.org
+ * contact: bugsounet@bugsounet.fr
+ * site web: http://www.bugsounet.fr
  *
- * Services pour serveur IRC. Supporté sur IrcDreams V.2
+ * Services pour serveur IRC. Supporté sur IrcDreams V3
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
