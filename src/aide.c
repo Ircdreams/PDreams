@@ -57,11 +57,11 @@ int aide(aNick *nick, aChan *chaninfo, int parc, char **parv)
 	if(parc > 1) {
 		Strncpy(more, parv[2], sizeof more - 1);
 		morelen = strlen(more);
-		osntc(nick, "\2HELP\2 about command \2%s\2 >> \2%s\2 (\2\003%s\2\3 LEVEL %d)", parv[1], more,
+		osntc(nick, "\2HELP\2 about command: \2%s\2 >> \2%s\2 (\2\003%s\2\3 LEVEL %d)", parv[1], more,
 			AdmCmd(cmdp) ? "4ADMIN" : ChanCmd(cmdp) ? "12CHAN" : HelpCmd(cmdp) ? "7HELPER" : "3USER", cmdp->level);
 	}
 	else {
-		osntc(nick, "\2HELP\2 about command \2%s\2 (\2\003%s\2\3 Level %d)", parv[1],
+		osntc(nick, "\2HELP\2 about command: \2%s\2 (\2\003%s\2\3 Level %d)", parv[1],
 			AdmCmd(cmdp) ? "4ADMIN" : ChanCmd(cmdp) ? "12CHAN" : HelpCmd(cmdp) ? "7HELPER" : "3USER", cmdp->level);
 		if(*cmdp->syntax) osntc(nick, cmdp->syntax, cmdp->name);
 	}

@@ -1,10 +1,10 @@
 /* src/divers.c - Diverses commandes
- * Copyright (C) 2004-2005 ircdreams.org
+ * Copyright (C) 2021 ircdreams.org - bugsounet.fr
  *
- * contact: bugs@ircdreams.org
- * site web: http://ircdreams.org
+ * contact: bugsounet@bugsounet.fr
+ * site web: http://www.bugsounet.fr
  *
- * Services pour serveur IRC. Supporté sur IrcDreams V.2
+ * Services pour serveur IRC. Supporté sur IrcDreams V3
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * $Id: divers.c,v 1.2 2005/06/19 11:24:05 bugs Exp $
  */
 
 #include "main.h"
@@ -32,7 +31,7 @@
 
 int uptime(aNick *nick, aChan *chaninfo, int parc, char **parv)
 {
-	return osntc(nick, "Les services sont en ligne depuis %s", duration(CurrentTS - bot.uptime));
+	return osntc(nick, "Service are UP since %s", duration(CurrentTS - bot.uptime));
 }
 
 int ctcp_ping(aNick *nick, aChan *chaninfo, int parc, char **parv)
@@ -43,13 +42,13 @@ int ctcp_ping(aNick *nick, aChan *chaninfo, int parc, char **parv)
 
 int ctcp_version(aNick *nick, aChan *chaninfo, int parc, char **parv)
 {
-    osntc(nick, "\1VERSION Services PDreams [" SPVERSION "] © IrcDreams.org (Compilé le " __DATE__ " "__TIME__ ")\1");
+    osntc(nick, "\1VERSION PDreams Service [" SPVERSION "] ©bugsounet.fr (Build: " __DATE__ " "__TIME__ ")\1");
 	return 1;
 }
 
 int version(aNick *nick, aChan *chaninfo, int parc, char **parv)
 {
-	osntc(nick, "Services PDreams [" SPVERSION "] © IrcDreams.org (Compilé le " __DATE__ " "__TIME__ ")");
+	osntc(nick, "PDreams Service [" SPVERSION "] ©bugsounet (Build: " __DATE__ " "__TIME__ ")");
         return 1;
 }
 
@@ -57,9 +56,9 @@ int show_admins(aNick *nick, aChan *chaninfo, int parc, char **parv)
 {
 	int i = 0;
 	anUser *u;
-	osntc(nick, "\2Présent  Niveau  Username       Pseudo\2");
+	osntc(nick, "\2Here  Level  Username       Nickname\2");
 	for(;i < USERHASHSIZE;++i) for(u = user_tab[i];u;u = u->next)
-		if(IsAdmin(u)) osntc(nick, "\2\003%s\2\3      %d       %-13s  \0032%s\3",
-				u->n ? "3OUI" : "4NON", u->level, u->nick, u->n ? u->n->nick : "");
+		if(IsAdmin(u)) osntc(nick, "\2\003%s\2\3 %d     %-13s    \0032%s\3",
+				u->n ? "3YES" : "4NO", u->level, u->nick, u->n ? u->n->nick : "");
 	return 1;
 }
