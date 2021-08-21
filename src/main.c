@@ -152,7 +152,7 @@ int main(int argc, char **argv)
 	RegisterCmd("INVITEME",  	1, CMD_ADMIN, 0, inviteme);
 	RegisterCmd("WRITE", 		4, CMD_ADMIN, 0, write_files);
 	RegisterCmd("SHOWCONFIG", 	3, CMD_NEEDNOAUTH|CMD_ADMIN, 0, showconfig);
-	RegisterCmd("AIDE",         0, CMD_NEEDNOAUTH, 0, aide);
+	RegisterCmd("HELP",         0, CMD_NEEDNOAUTH, 0, aide);
 	RegisterCmd("SHOWCOMMANDS",	0, CMD_NEEDNOAUTH, 0, showcommands);
 	RegisterCmd("ADMIN", 		0, CMD_NEEDNOAUTH, 0, show_admins);
 	RegisterCmd("UPTIME", 		0, CMD_NEEDNOAUTH, 0, uptime);
