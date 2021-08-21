@@ -222,14 +222,14 @@ char *duration(int s)
 	int i = 1;
 	dur[0] = '\002'; 
     
-        if(s >= 86400) 
-                i += sprintf(dur + i, "%d", s/86400), s %= 86400, strcpy(dur + i, "\2 days \002"), i += 9; 
-        if(s >= 3600) 
-                i += sprintf(dur + i, "%d", s/3600), s %= 3600, strcpy(dur + i, "\2 hours \002"), i += 10; 
-        if(s >= 60) 
-                i += sprintf(dur + i, "%d", s/60), s %= 60, strcpy(dur + i, "\2 minutes \002"), i += 11; 
-        if(s) i += sprintf(dur + i, "%d",s), strcpy(dur + i, "\2 secondes"); 
-        else dur[i-2]= 0; 
+        if(s >= 86400)
+                i += sprintf(dur + i, "%d", s/86400), s %= 86400, strcpy(dur + i, "\2 days \002"), i += 8;
+        if(s >= 3600)
+                i += sprintf(dur + i, "%d", s/3600), s %= 3600, strcpy(dur + i, "\2 hours \002"), i += 9;
+        if(s >= 60)
+                i += sprintf(dur + i, "%d", s/60), s %= 60, strcpy(dur + i, "\2 minutes \002"), i += 11;
+        if(s) i += sprintf(dur + i, "%d",s), strcpy(dur + i, "\2 secondes");
+        else dur[i-2]= 0;
 
 	return dur;
 }
