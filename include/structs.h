@@ -1,10 +1,10 @@
 /* include/structs.h - Déclaration des différentes structures
- * Copyright (C) 2004 ircdreams.org
+ * Copyright (C) 2021 ircdreams.org - bugsounet.fr
  *
- * contact: bugs@ircdreams.org
- * site web: http://ircdreams.org
+ * contact: bugsounet@bugsounet.fr
+ * site web: http://www.bugsounet.fr
  *
- * Services pour serveur IRC. Supporté sur IrcDreams V.2
+ * Services pour serveur IRC. Supporté sur IrcDreams V3
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -98,11 +98,10 @@ typedef struct nickinfo {
 #define N_CHANNEL	0x080000
 #define N_PRIVATE	0x100000
 #define N_HIDE		0x200000
-#define N_HASKILL       0x400000
-#define N_COADM		0x800000
+#define N_HASKILL   0x400000
 #define N_UMODES (N_INV |N_CRYPT|N_REG|N_OPER|N_SERVICE|N_ADM|N_GOD \
 	|N_FEMME|N_HOMME|N_DEBUG|N_WALLOPS|N_DIE|N_DEAF|N_SPOOF|N_HELPER \
-	|N_WHOIS|N_IDLE|N_CHANNEL|N_PRIVATE|N_HIDE|N_COADM)
+	|N_WHOIS|N_IDLE|N_CHANNEL|N_PRIVATE|N_HIDE)
 
 	time_t ttmco;
 	time_t floodtime;

@@ -19,7 +19,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * $Id: main.c,v 1.3 2005/06/19 11:24:05 bugs Exp $
  */
 
 #include "main.h"
@@ -142,9 +141,9 @@ int main(int argc, char **argv)
 	}
 	else bot.uptime = CurrentTS;
 
-	RegisterCmd("REGISTER",              0, CMD_NEEDNOAUTH, 1, first_register);
-	RegisterCmd("USER",              3, CMD_ADMIN, 1, user);
-	RegisterCmd("DIE", 		5, CMD_ADMIN, 0, die);
+	RegisterCmd("REGISTER",     0, CMD_NEEDNOAUTH, 1, first_register);
+	RegisterCmd("USER",         3, CMD_ADMIN, 1, user);
+	RegisterCmd("DIE", 		    5, CMD_ADMIN, 0, die);
 	RegisterCmd("REHASH",		5, CMD_ADMIN, 0, rehash_conf);
 	RegisterCmd("RESTART", 		5, CMD_ADMIN, 0, restart_bot);
 	RegisterCmd("CHCOMNAME", 	4, CMD_ADMIN, 2, chcomname);
@@ -153,14 +152,14 @@ int main(int argc, char **argv)
 	RegisterCmd("INVITEME",  	1, CMD_ADMIN, 0, inviteme);
 	RegisterCmd("WRITE", 		4, CMD_ADMIN, 0, write_files);
 	RegisterCmd("SHOWCONFIG", 	3, CMD_NEEDNOAUTH|CMD_ADMIN, 0, showconfig);
-	RegisterCmd("AIDE",             0, CMD_NEEDNOAUTH, 0, aide);
+	RegisterCmd("AIDE",         0, CMD_NEEDNOAUTH, 0, aide);
 	RegisterCmd("SHOWCOMMANDS",	0, CMD_NEEDNOAUTH, 0, showcommands);
 	RegisterCmd("ADMIN", 		0, CMD_NEEDNOAUTH, 0, show_admins);
 	RegisterCmd("UPTIME", 		0, CMD_NEEDNOAUTH, 0, uptime);
 	RegisterCmd("\1PING\1",		0, CMD_NEEDNOAUTH, 0, ctcp_ping);
 	RegisterCmd("\1VERSION\1", 	0, CMD_NEEDNOAUTH, 0, ctcp_version);
-	RegisterCmd("VERSION",      	0, CMD_NEEDNOAUTH, 0, version);
-	RegisterCmd("TRUST",            2, CMD_ADMIN, 1, trust);
+	RegisterCmd("VERSION",      0, CMD_NEEDNOAUTH, 0, version);
+	RegisterCmd("TRUST",        2, CMD_ADMIN, 1, trust);
 	RegisterCmd("IPCHECK",		2, CMD_ADMIN, 1, dnscheck);
 
 	tmp = load_cmds();

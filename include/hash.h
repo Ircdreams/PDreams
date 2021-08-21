@@ -1,10 +1,10 @@
 /* include/hash.h
- * Copyright (C) 2004 ircdreams.org
+ * Copyright (C) 2021 ircdreams.org - bugsounet.fr
  *
- * contact: bugs@ircdreams.org
- * site web: http://ircdreams.org
+ * contact: bugsounet@bugsounet.fr
+ * site web: http://www.bugsounet.fr
  *
- * Services pour serveur IRC. Supporté sur IrcDreams V.2
+ * Services pour serveur IRC. Supporté sur IrcDreams V3
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * $Id: hash.h,v 1.1.1.1 2005/05/28 20:44:12 bugs Exp $
  */
 
 #ifndef HAVEINC_hash
@@ -42,7 +41,7 @@ extern unsigned int base64toint(const char *);
 extern aNick *num2nickinfo(const char *);
 extern aNick *getnickbynick(const char *);
 extern aNick *add_nickinfo(const char *, const char *, const char *, const char *,
-			const char *, aServer *, const char *, time_t, const char *);
+const char *, aServer *, const char *, time_t, const char *);
 extern void del_nickinfo(const char *, const char *);
 extern int switch_nick(aNick *, const char*);
 extern int purge_nickandserv(void);

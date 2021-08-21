@@ -1,10 +1,10 @@
 /* src/outils.c - Divers outils
- * Copyright (C) 2005 ircdreams.org
+ * Copyright (C) 2021 ircdreams.org - bugsounet.fr
  *
- * contact: bugs@ircdreams.org
- * site web: http://ircdreams.org
+ * contact: bugsounet@bugsounet.fr
+ * site web: http://www.bugsounet.fr
  *
- * Services pour serveur IRC. Supporté sur IrcDreams V.2
+ * Services pour serveur IRC. Supporté sur IrcDreams V3
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * $Id: outils.c,v 1.2 2005/06/19 11:24:05 bugs Exp $
  */
 
 #include <ctype.h>
@@ -80,7 +79,6 @@ static const struct Modes {
 	{ 'I', N_IDLE },
 	{ 'P', N_PRIVATE },
 	{ 'X', N_HIDE },
-	{ 'c', N_COADM },
 },
 	CMode[] = {
 	{ 'n', C_MMSG },
@@ -225,9 +223,9 @@ char *duration(int s)
 	dur[0] = '\002'; 
     
         if(s >= 86400) 
-                i += sprintf(dur + i, "%d", s/86400), s %= 86400, strcpy(dur + i, "\2 jours \002"), i += 9; 
+                i += sprintf(dur + i, "%d", s/86400), s %= 86400, strcpy(dur + i, "\2 days \002"), i += 9; 
         if(s >= 3600) 
-                i += sprintf(dur + i, "%d", s/3600), s %= 3600, strcpy(dur + i, "\2 heures \002"), i += 10; 
+                i += sprintf(dur + i, "%d", s/3600), s %= 3600, strcpy(dur + i, "\2 hours \002"), i += 10; 
         if(s >= 60) 
                 i += sprintf(dur + i, "%d", s/60), s %= 60, strcpy(dur + i, "\2 minutes \002"), i += 11; 
         if(s) i += sprintf(dur + i, "%d",s), strcpy(dur + i, "\2 secondes"); 
@@ -283,18 +281,18 @@ char *get_time(aNick *nick, time_t mytime)
 	int i = 0;
 	const char *ptr = {0};
 
-	if(lt->tm_wday == 0) ptr = "Dimanche";
-	if(lt->tm_wday == 1) ptr = "Lundi";
-	if(lt->tm_wday == 2) ptr = "Mardi";
-	if(lt->tm_wday == 3) ptr = "Mercredi";
-	if(lt->tm_wday == 4) ptr = "Jeudi";
-	if(lt->tm_wday == 5) ptr = "Vendredi";
-	if(lt->tm_wday == 6) ptr = "Samedi";
+	if(lt->tm_wday == 0) ptr = "Sunday";
+	if(lt->tm_wday == 1) ptr = "Monday";
+	if(lt->tm_wday == 2) ptr = "Tuesday";
+	if(lt->tm_wday == 3) ptr = "Wednesday";
+	if(lt->tm_wday == 4) ptr = "Thusday";
+	if(lt->tm_wday == 5) ptr = "Friday";
+	if(lt->tm_wday == 6) ptr = "Saturday";
 
-        while((buftime[i++] = *ptr++)); 
+    while((buftime[i++] = *ptr++)); 
     
-        buftime[i-1] = ' '; 
-        buftime[i] = ' '; 
+    buftime[i-1] = ' '; 
+    buftime[i] = ' '; 
 	
 	snprintf(buftime + i + 1, sizeof buftime,"%02d-%02d-%d %02d:%02d:%02d",
 		lt->tm_mday, lt->tm_mon + 1, 1900 + lt->tm_year, lt->tm_hour, lt->tm_min, lt->tm_sec);
