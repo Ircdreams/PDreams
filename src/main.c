@@ -109,7 +109,7 @@ int main(int argc, char **argv)
 				silent = 1;
 				break;
 			default:
-				printf("Syntaxe: %s [-hn]\n", argv[0]);
+				printf("Syntax: %s [-hn]\n", argv[0]);
 				exit(EXIT_FAILURE);
 		}
 
@@ -119,8 +119,8 @@ int main(int argc, char **argv)
 	{
 		if(fscanf(fd, "%d", &tmp) == 1)
 		{
-			fprintf(stderr, "PDreams est déjà lancé sur le pid %d.\n"
-			"Si ce n'est pas le cas, supprimez le fichier '"PDREAMS_PID"' et recommencez.\n", tmp);
+			fprintf(stderr, "PDreams is already launched on pid %d.\n"
+			"If not, delete the file '"PDREAMS_PID"' and retry.\n", tmp);
 		}
 		fclose(fd);
 		exit(EXIT_FAILURE);
@@ -128,7 +128,7 @@ int main(int argc, char **argv)
 
 	if(load_config(FICHIER_CONF) == -1)
 	{
-		fputs("Erreur lors de la lecture de la configuration\n", stderr);
+		fputs("Error reading configuration\n", stderr);
 		exit(EXIT_FAILURE);
 	}
 
@@ -163,12 +163,12 @@ int main(int argc, char **argv)
 	RegisterCmd("IPCHECK",		2, CMD_ADMIN, 1, dnscheck);
 
 	tmp = load_cmds();
-	if(!silent) printf("Chargement des commandes IRC... OK (%d)\n", tmp);
+	if(!silent) printf("Loading IRC commands... (%d)\n", tmp);
 	BuildCommandsTable(0);
 	tmp = db_load_users();
-	if(!silent) printf("Base de donnée User chargée (%d)\n", tmp);
+	if(!silent) printf("Loading User Database... (%d)\n", tmp);
 	tmp = load_trusted();
-	if(!silent) printf("Chargement de trust... OK (%d)\n", tmp);
+	if(!silent) printf("Loading Trust Database... (%d)\n", tmp);
 
 
 	help_load();
@@ -178,21 +178,21 @@ int main(int argc, char **argv)
 	signal(SIGINT, &sig_restart);
 	signal(SIGTERM, &sig_die);
 
-	if(!restarted && !silent) puts("Proxy Dreams " SPVERSION " © 2005 IrcDreams.org");
+	if(!restarted && !silent) puts("Proxy Dreams " SPVERSION " © 2021 ircdreams.org / bugsounet.fr");
 	if(background && (tmp = fork()) == -1)
 	{
-		Debug(W_TTY, "Impossible de se lancer en background.");
+		Debug(W_TTY, "Unable to launch in the background.");
 		exit(EXIT_FAILURE);
 	}
 	else if(background && tmp > 1) /* fork ok */
 	{
-		if(!restarted && !silent) puts("Lancement en background...");
+		if(!restarted && !silent) puts("Launch in background ...");
 		exit(0);
 	}
 
 	if(!getrlimit(RLIMIT_CORE, &rlim) && rlim.rlim_cur != RLIM_INFINITY)
 	{
-		Debug(W_TTY, "Core size limitée à %ldk, changement en illimité.", rlim.rlim_cur);
+		Debug(W_TTY, "Core size limited to %ldk, change to unlimited.", rlim.rlim_cur);
 		rlim.rlim_cur = RLIM_INFINITY;
 		rlim.rlim_max = RLIM_INFINITY;
 		setrlimit(RLIMIT_CORE, &rlim);
@@ -200,12 +200,12 @@ int main(int argc, char **argv)
 
 	if(GetConf(CF_PREMIERE))
 		{
-		printf("Premier lancement de PDreams. Merci de votre choix.\n");
+		printf("First launch of PDreams. Thank you for your choice.\n");
 		printf("\n");
-		printf("Lorsque les services seront sur votre réseau IRC,\n tapez : "
+		printf("When service is on your IRC network, \n type: "
 			"/%s %s <username>\n", os.nick, RealCmd("register"));
 		printf("\n");
-		printf("ATTENTION: PDreams utilise les comptes de SDreams. Il est donc impératif d'utiliser les memes logins!\n");
+		printf("WARNING: PDreams uses SDreams accounts. It is therefore imperative to use the same logins!\n");
 		}
 
 	FD_ZERO(&global_fd_set);
@@ -217,19 +217,19 @@ sprintf(os.num, "%sAAA", bot.servnum);
 		fprintf(fd, "%d\n", (int) getpid());
 		fclose(fd);
 	}
-	else Debug(W_TTY, "Impossible d'écrire le fichier PID. [%s]", strerror(errno));
+	else Debug(W_TTY, "Unable to write PID file. [%s]", strerror(errno));
 
 	while(running)
 	{
 		unsigned long int irc_ip = inet_addr(bot.ip);
 
-		if(irc_ip == INADDR_NONE) putlog(LOG_ERREURS, "DNS lockup a échoué pour [%s]", bot.ip);
-		else if(init_bot(irc_ip) < 0) putlog(LOG_ERREURS, "Connexion échouée.");
+		if(irc_ip == INADDR_NONE) putlog(LOG_ERREURS, "DNS lockup failed for [%s]", bot.ip);
+		else if(init_bot(irc_ip) < 0) putlog(LOG_ERREURS, "Failed connection.");
 		else run_bot(bot.sock);
 
 		if(running)
 		{
-			putlog(LOG_ERREURS, "Déconnecté du serveur.");
+			putlog(LOG_ERREURS, "Disconnected from the server.");
 
 			purge_nickandserv();
 
@@ -241,7 +241,7 @@ sprintf(os.num, "%sAAA", bot.servnum);
 	write_cmds();
 	remove(PDREAMS_PID);
 	CleanUp();
-	putlog(LOG_PARSES, "Fermeture normale du programme");
+	putlog(LOG_PARSES, "Program ends normally");
 	if(GetConf(CF_RESTART)) execlp(argv[0], argv[0], "-h", NULL); /* restarting.. */
 	return 0;
 }

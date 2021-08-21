@@ -303,7 +303,7 @@ static int readconf(FILE *fp)
 	}
 	else for(i = 0;i < ASIZE(conftab);++i) if(conftab[i].id < CONF_IREAD)
 	{
-		printf("conf -- Table '%s' manquante (%s).\n", conftab[i].item, conftab[i].description);
+		printf("conf -- Table '%s' missing (%s).\n", conftab[i].item, conftab[i].description);
 		return -1;
 	}
 	return 1;
@@ -318,6 +318,6 @@ int load_config(const char *file)
 	error = readconf(fp);
 	fclose(fp);
 	}
-	else printf("conf: Impossible d'ouvrir le fichier de conf (%s)", strerror(errno));
+	else printf("conf: Unable to open configuration file (%s)", strerror(errno));
 	return error;
 }
