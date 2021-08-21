@@ -292,10 +292,10 @@ char *get_time(aNick *nick, time_t mytime)
     while((buftime[i++] = *ptr++)); 
     
     buftime[i-1] = ' '; 
-    buftime[i] = ' '; 
-	
-	snprintf(buftime + i + 1, sizeof buftime,"%02d-%02d-%d %02d:%02d:%02d",
-		lt->tm_mday, lt->tm_mon + 1, 1900 + lt->tm_year, lt->tm_hour, lt->tm_min, lt->tm_sec);
+    buftime[i] = ' ';
+
+    snprintf(buftime + i + 1, sizeof buftime,"%d-%02d-%02d %02d:%02d:%02d",
+		1900 + lt->tm_year, lt->tm_mon + 1, lt->tm_mday, lt->tm_hour, lt->tm_min, lt->tm_sec);
 	return buftime;	
 }
 
